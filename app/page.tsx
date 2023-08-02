@@ -1,9 +1,29 @@
-import Image from 'next/image'
+import SignInButton from '@/components/SignInButton'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { getAuthSession } from '@/lib/nextauth'
+import {redirect} from 'next/navigation';
 
-export default function Home() {
+export default async function Home() {
+  const session=await getAuthSession();
+  if(session?.user){
+    return redirect("/dashboard")
+  }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className='text-3xl font-semibold'>Start your project</h1>
-    </main>
+   <div className='absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
+    <Card className='w-[300px]'>
+      <CardHeader>
+        <CardTitle>
+          Welcome to Quizmify
+        </CardTitle>
+        <CardDescription>
+          Quizmify is a quiz app that allows you to create and share quizz with your friends
+        </CardDescription>
+      </CardHeader>
+      <CardContent className='text-center'>
+        <SignInButton text='Sign In with Google !'/>
+      </CardContent>
+    </Card>
+
+   </div>
   )
 }
