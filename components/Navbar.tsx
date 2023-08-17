@@ -2,6 +2,7 @@
 import React from 'react'
 import { NavigationMenu, NavigationMenuLink } from './ui/navigation-menu'
 import { Button } from './ui/button'
+import {MoveDownRight} from 'lucide-react'
 
 type Props = {}
 
@@ -13,7 +14,7 @@ const Navbar = (props: Props) => {
   <NavigationMenuLink className='cursor-pointer'>Works</NavigationMenuLink>
   <NavigationMenuLink className='cursor-pointer'>About</NavigationMenuLink>
   <NavigationMenuLink className='cursor-pointer'>My Services</NavigationMenuLink>
-  <Button className='rounded-full bg-inherit text-inherit shadow-none border border-slate-300 text-md'>Get in touch </Button>
+  <Button className='rounded-full bg-inherit text-inherit shadow-none border border-slate-300 text-md font-normal hover:bg-slate-100 '>Get in touch <MoveDownRight size={16} className='ml-1' /></Button>
 </NavigationMenu>
 </header>
   )
