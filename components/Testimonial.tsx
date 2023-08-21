@@ -13,6 +13,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import axios from "axios";
+import { useToast } from "./ui/use-toast";
 
 type Props = {};
 export interface Itestimonial {
@@ -29,6 +30,7 @@ const PRESET_KEY = "wki449l7";
 const CLOUD_NAME = "joyadeep";
 
 const Testimonial = (props: Props) => {
+  const {toast}=useToast();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -38,6 +40,7 @@ const Testimonial = (props: Props) => {
   });
   const [img, setImg] = useState("");
   const [testimonials, setTestimonials] = useState<Itestimonial[]>([]);
+  const [isOpen,setIsOpen]=useState(false)
 
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -47,10 +50,8 @@ const Testimonial = (props: Props) => {
   };
 
   const handleSubmit=async(e:any)=>{
-    // console.log("clicked")
     e.preventDefault();
     let requestData={};
-    // setIsLoading(true);
     try {
       if (img){
         const formdata=new FormData();
@@ -63,32 +64,26 @@ const Testimonial = (props: Props) => {
     })
     const imageUrl = result.data.url;
 
-    // Update the image URL and other data in state
     setData({ ...data, image: imageUrl });
 
-    // Create a new object containing the data and image URL
     requestData = { ...data, image: imageUrl };
       }
       else{
         requestData=data;
       }
       const response=await axios.post("http://localhost:3000/api/testimonial",requestData)
-      if(response.status===200){
-        console.log("response ===",response)
+      if(response.status===201){
+        toast({title:"Created",description:"Your testimonial has been created successfully!"})
         setData({name:'',email:'',designation:'',image:'',message:''})
-        // toast.success("Thank you for your feedback!")
-        // setIsOpen(false);
+        setIsOpen(false);
       }
       else{
-        console.log("error occured")
-        // toast.error("Cannot post feedback!")
+        toast({variant:'destructive',title:"Error",description:"Cannot post your words right now"})
+        console.log("error occured",response)
       }
     } catch (error) {
       console.log("error occured")
-      // toast.error("Cannot Post !")
     } 
-    // finally{
-      // setIsLoading(false)
     }
 
   return (
@@ -99,9 +94,9 @@ const Testimonial = (props: Props) => {
           words of appreciation
         </h2>
         <div className="w-1/4 text-right">
-          <Dialog>
+          <Dialog open={isOpen} onOpenChange={setIsOpen} modal={true}>
             <DialogTrigger asChild>
-              <Button variant="outline">Add</Button>
+              <Button variant="outline" onClick={()=>setIsOpen(true)}>Add</Button>
             </DialogTrigger>
             <DialogContent className="">
               <DialogHeader>
@@ -111,7 +106,8 @@ const Testimonial = (props: Props) => {
                 <div className="flex gap-3">
                 <div>
                   <Label htmlFor="name">Name</Label>
-                  <Input
+                  <Input 
+                  required
                     name="name"
                     value={data.name}
                     onChange={handleChange}
@@ -120,6 +116,7 @@ const Testimonial = (props: Props) => {
                 <div>
                   <Label htmlFor="email">Email</Label>
                   <Input
+                  required
                     name="email"
                     value={data.email}
                     onChange={handleChange}
@@ -129,6 +126,7 @@ const Testimonial = (props: Props) => {
                 <div>
                   <Label htmlFor="designation">Designation</Label>
                   <Input
+                  required
                     name="designation"
                     value={data.designation}
                     onChange={handleChange}
@@ -145,6 +143,7 @@ const Testimonial = (props: Props) => {
                 <div>
                   <Label htmlFor="message">Message</Label>
                   <Textarea
+                  required
                     className="resize-none"
                     name="message"
                     value={data.message}
