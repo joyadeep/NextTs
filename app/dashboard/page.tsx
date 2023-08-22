@@ -9,7 +9,7 @@ type Props = {}
 const Dashboard = (props: Props) => {
     const router=useRouter();
     const status=false
-    if(!status)
+    if(status===false)
         router.push("/")
   return (
     <div>Dashboard</div>
