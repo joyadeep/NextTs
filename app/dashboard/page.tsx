@@ -8,7 +8,8 @@ type Props = {}
 
 const Dashboard = (props: Props) => {
     const router=useRouter();
-    if(!localStorage.getItem("newToken"))
+    const status=false
+    if(!status)
         router.push("/")
   return (
     <div>Dashboard</div>
