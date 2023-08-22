@@ -1,5 +1,5 @@
 "use client";
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import TestimonialCard from "./TestimonialCard";
 import {
   Dialog,
@@ -14,6 +14,8 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
+import useSWR from 'swr';
+import { fetcher } from "@/lib/fetcher";
 
 type Props = {};
 export interface Itestimonial {
@@ -30,6 +32,25 @@ const PRESET_KEY = "wki449l7";
 const CLOUD_NAME = "joyadeep";
 
 const Testimonial = (props: Props) => {
+  // const {data:datas,error}=useSWR("http://localhost:3000/api/testimonial",fetcher,{
+  //   onSuccess:(res)=>{
+  //     console.log("fetch response ==",res)
+  //   }
+  // })
+  useEffect(()=>{
+    const fetch=async()=>{
+      try {
+        const result=await axios.get("http://localhost:3000/api/testimonial");
+        if(result.status===200){
+          setTestimonials(result.data.result)
+        }
+        else throw new Error("something went wrong!")
+      } catch (error) {
+        console.log("error",error)
+      }
+    }
+    fetch()
+  },[])
   const {toast}=useToast();
   const [data, setData] = useState({
     name: "",
@@ -71,7 +92,7 @@ const Testimonial = (props: Props) => {
       else{
         requestData=data;
       }
-      const response=await axios.post("http://localhost:3000/api/testimonial",requestData)
+      const response=await axios.post("/api/testimonial",requestData)
       if(response.status===201){
         toast({title:"Created",description:"Your testimonial has been created successfully!"})
         setData({name:'',email:'',designation:'',image:'',message:''})
@@ -160,17 +181,21 @@ const Testimonial = (props: Props) => {
       {/* {isFetching ? ( */}
       {/* <div className='text-center text-xl pt-10 text-slate-500'>Fetching</div> */}
       {/* ) : ( */}
-      {/* testimonials.length === 0 ? ( */}
-      {/* <div className='text-center text-xl pt-10 text-slate-500'>Testimonial is empty. Be the first to add one.</div> */}
-      {/* ) : ( */}
+
+{
+      testimonials.length === 0 ? 
+      <div className='text-center text-xl pt-10 text-slate-500'>Testimonial is empty. Be the first to add one.</div>
+       : (
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-5">
-        {[1, 2, 3].map((testimonial) => (
+        {testimonials.map((testimonial) => (
           <TestimonialCard
-            key={testimonial}
-            // testimonial={testimonial}
+            key={testimonial._id}
+            testimonial={testimonial}
           />
         ))}
       </div>
+       )}
+
       {/* ) */}
       {/* )} */}
     </div>

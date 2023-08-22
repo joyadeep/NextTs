@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export const GET=async(req:Request,res:NextResponse)=>{
 try {
     startServer()
-    const result = await prisma.testimonial.findMany();
+    const result = await prisma.testimonial.findMany({where:{status:true}});
     if(!result)
         return NextResponse.json({
             message:"no data found !"
