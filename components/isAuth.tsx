@@ -8,16 +8,8 @@ const isAuth = <T extends {}>(Component: React.ComponentType<T>) => {
         // make a api call to check if user is authenticated
         // const { data, loading, error } = useMeQuery();
         const router = useRouter();
-        const isAuthenticated = localStorage.getItem("portfolio")
-
-        // if (loading) {
-        //     return <div>Loading...</div>;
-        // }
-
-        // if (error || !data) {
-        //     router.push('/login');
-        // }
-        if(! isAuthenticated)
+        const isAuthenticated = false;
+        if(isAuthenticated===false)
         {
             router.push("/auth")
         }
