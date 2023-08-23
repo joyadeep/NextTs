@@ -40,7 +40,7 @@ const Testimonial = (props: Props) => {
   useEffect(()=>{
     const fetch=async()=>{
       try {
-        const result=await axios.get("http://localhost:3000/api/testimonial");
+        const result=await axios.get("/api/testimonial");
         if(result.status===200){
           setTestimonials(result.data.result)
         }
