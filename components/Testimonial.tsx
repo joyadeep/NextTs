@@ -16,6 +16,11 @@ import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import useSWR from 'swr';
 import { fetcher } from "@/lib/fetcher";
+import LoadingSkeleton from "./LoadingSkeleton";
+import {Loader2} from 'lucide-react'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 
 type Props = {};
 export interface Itestimonial {
@@ -32,13 +37,9 @@ const PRESET_KEY = "wki449l7";
 const CLOUD_NAME = "joyadeep";
 
 const Testimonial = (props: Props) => {
-  // const {data:datas,error}=useSWR("http://localhost:3000/api/testimonial",fetcher,{
-  //   onSuccess:(res)=>{
-  //     console.log("fetch response ==",res)
-  //   }
-  // })
   useEffect(()=>{
     const fetch=async()=>{
+      setIsLoading(true)
       try {
         const result=await axios.get("/api/testimonial");
         if(result.status===200){
@@ -47,6 +48,8 @@ const Testimonial = (props: Props) => {
         else throw new Error("something went wrong!")
       } catch (error) {
         console.log("error",error)
+      } finally {
+        setIsLoading(false)
       }
     }
     fetch()
@@ -62,6 +65,8 @@ const Testimonial = (props: Props) => {
   const [img, setImg] = useState("");
   const [testimonials, setTestimonials] = useState<Itestimonial[]>([]);
   const [isOpen,setIsOpen]=useState(false)
+  const [isLoading,setIsLoading]=useState(false);
+  const [isSubmiting,setIsSubmitting]=useState(false)
 
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -73,6 +78,7 @@ const Testimonial = (props: Props) => {
   const handleSubmit=async(e:any)=>{
     e.preventDefault();
     let requestData={};
+    setIsSubmitting(true)
     try {
       if (img){
         const formdata=new FormData();
@@ -96,6 +102,7 @@ const Testimonial = (props: Props) => {
       if(response.status===201){
         toast({title:"Created",description:"Your testimonial has been created successfully!"})
         setData({name:'',email:'',designation:'',image:'',message:''})
+        setImg("")
         setIsOpen(false);
       }
       else{
@@ -104,20 +111,21 @@ const Testimonial = (props: Props) => {
       }
     } catch (error) {
       console.log("error occured")
-    } 
+    } finally{
+      setIsSubmitting(false)
+    }
     }
 
   return (
     <div className=" px-5 md:px-20">
-      <div className=" flex justify-between items-center gap-10">
-        <div className="w-1/4"></div>
-        <h2 className="text-4xl font-bold tracking-tighter capitalize whitespace-nowrap">
+        <h2 className="text-4xl text-center font-bold tracking-tighter capitalize whitespace-nowrap">
           words of appreciation
         </h2>
-        <div className="w-1/4 text-right">
-          <Dialog open={isOpen} onOpenChange={setIsOpen} modal={true}>
+        <Dialog open={isOpen} onOpenChange={setIsOpen} modal={true}>
             <DialogTrigger asChild>
-              <Button variant="outline" onClick={()=>setIsOpen(true)}>Add</Button>
+              <div className="w-full text-right">
+              <Button variant="link" onClick={()=>setIsOpen(true)}>Add your voice</Button>
+              </div>
             </DialogTrigger>
             <DialogContent className="">
               <DialogHeader>
@@ -171,33 +179,73 @@ const Testimonial = (props: Props) => {
                     onChange={handleChange}
                   />
                 </div>
-                <Button>Create</Button>
+                <Button disabled={isSubmiting}>{isSubmiting && <Loader2 className="animate-spin"/>} Create</Button>
               </form>
             </DialogContent>
           </Dialog>
-          {/* <Button title='Add your voice' classname='bg-transparent text-slate-500  hover:bg-transparent p-0 font-medium hover:underline decoration-blue-500 hover:underline-offset-4 hover:text-black' handleClick={handleModal} /> */}
-        </div>
-      </div>
-      {/* {isFetching ? ( */}
-      {/* <div className='text-center text-xl pt-10 text-slate-500'>Fetching</div> */}
-      {/* ) : ( */}
-
 {
-      testimonials.length === 0 ? 
-      <div className='text-center text-xl pt-10 text-slate-500'>Testimonial is empty. Be the first to add one.</div>
+      isLoading ? 
+      (
+        <Swiper
+        spaceBetween={30}
+        loop={true}
+        autoplay={{
+          delay: 1000,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay]}
+        breakpoints={{
+          1200: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          0: {
+            slidesPerView: 1,
+          },
+        }}
+      >
+       { [1,2,3].map((item)=>(
+        <SwiperSlide key={item}>
+          <LoadingSkeleton/>
+        </SwiperSlide>
+        ))}
+        </Swiper>
+      )
        : (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-5">
-        {testimonials.map((testimonial) => (
+        <Swiper
+        spaceBetween={30}
+        loop={true}
+        autoplay={{
+          delay: 1000,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay]}
+        breakpoints={{
+          1200: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          0: {
+            slidesPerView: 1,
+          },
+        }}
+      >
+        {testimonials.map((testimonial,index) => (
+          <SwiperSlide key={index}>
           <TestimonialCard
             key={testimonial._id}
             testimonial={testimonial}
-          />
+            />
+            </SwiperSlide>
         ))}
-      </div>
+        
+      </Swiper>
        )}
 
-      {/* ) */}
-      {/* )} */}
     </div>
   );
 };
