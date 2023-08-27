@@ -187,7 +187,7 @@ const Testimonial = (props: Props) => {
       isLoading ? 
       (
         <Swiper
-        spaceBetween={30}
+        spaceBetween={20}
         loop={true}
         autoplay={{
           delay: 1000,
@@ -215,7 +215,7 @@ const Testimonial = (props: Props) => {
       )
        : (
         <Swiper
-        spaceBetween={30}
+        spaceBetween={20}
         loop={true}
         autoplay={{
           delay: 1000,

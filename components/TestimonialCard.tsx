@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { Card,CardContent } from './ui/card'
-import {Quote} from 'lucide-react'
+import {Quote,User2} from 'lucide-react'
 import { Itestimonial } from './Testimonial'
 
 type Props = {
@@ -10,13 +10,14 @@ type Props = {
 
 const TestimonialCard = ({testimonial}: Props) => {
   return (
-    <Card className='py-5 cursor-pointer hover:shadow-lg' 
-    // className='border rounded-md  p-5 flex justify-center flex-col  gap-3 shadow-md hover:shadow-xl cursor-pointer'
-    >
+    <Card className='py-5 cursor-pointer hover:shadow-lg'>
         <CardContent>
 
     <div className='relative w-20 h-20 mx-auto'>
+      {
+        !testimonial.image? <User2 size={78} /> :
       <Image src={testimonial.image} alt='' fill className='mx-auto object-cover rounded-full' />
+      }
     </div>
     <div className='text-center'>
     <h1 className='text-black text-lg font-medium tracking-tight capitalize'>{testimonial.name}</h1>
