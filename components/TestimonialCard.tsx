@@ -12,7 +12,6 @@ const TestimonialCard = ({testimonial}: Props) => {
   return (
     <Card className='py-5 cursor-pointer hover:shadow-lg'>
         <CardContent>
-
     <div className='relative w-20 h-20 mx-auto'>
       {
         !testimonial.image? <User2 size={78} /> :
@@ -21,10 +20,10 @@ const TestimonialCard = ({testimonial}: Props) => {
     </div>
     <div className='text-center'>
     <h1 className='text-black text-lg font-medium tracking-tight capitalize'>{testimonial.name}</h1>
-    <h3>
+    <h3 className='text-sm'>
       {testimonial.designation}
     </h3>
-    <h5 className='font-semibold text-slate-600'>{testimonial.email}</h5>
+    <h5 className='text-sm text-slate-600'>{testimonial.email}</h5>
     </div>
     <p className=' tracking-tighter text-slate-500 text-left '>
         <Quote size={24} className='text-blue-500'/>

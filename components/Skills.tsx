@@ -1,29 +1,31 @@
 import Image from 'next/image'
 import React from 'react'
+import ActionTooltip from './ActionTooltip'
 
 type Props = {}
 const images =[
-  "/images/html.svg",
-  "/images/css.svg",
-  "/images/javascript.svg",
-  "/images/react.svg",
-  "/images/next.svg",
-  "/images/typescript.svg",
-  "/images/tailwind.svg",
-  "/images/node.svg",
-  "/images/prisma.svg",
-  "/images/mongo.svg",
+  {label:"HTML",image:"/images/html.svg"},
+  {label:"CSS",image:"/images/css.svg"},
+  {label:"javascript",image:"/images/javascript.svg"},
+  {label:"React",image:"/images/react.svg"},
+  {label:"Next",image:"/images/next.svg"},
+  {label:"Typescript",image:"/images/typescript.svg"},
+  {label:"Tailwind",image:"/images/tailwind.svg"},
+  {label:"Node.js",image:"/images/node.svg"},
+  {label:"Prisma",image:"/images/prisma.svg"},
+  {label:"MongoDB",image:"/images/mongo.svg"}
 ]
 
 const Skills = (props: Props) => {
   return (
     <div className='pt-20 pb-10'>
-      {/* <h1 className='text-2xl text-slate-700 font-semibold tracking-tight'>Skills</h1> */}
       <div className='grid grid-cols-4 gap-y-14 place-items-center'>
         {
           images.map((image,index)=>(
-            <div key={index} className='relative w-12 h-12'>
-          <Image alt='' src={image} fill  title='react' className='drop-shadow-lg '/> 
+            <div key={index} className='relative w-12 h-12 cursor-pointer'>
+         <ActionTooltip label={image.label} align='center' side='top'>
+          <Image alt='' src={image.image} fill className='drop-shadow-lg '/> 
+         </ActionTooltip>
         </div>
           ))
         }

@@ -14,8 +14,6 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
-import useSWR from 'swr';
-import { fetcher } from "@/lib/fetcher";
 import LoadingSkeleton from "./LoadingSkeleton";
 import {Loader2} from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react';

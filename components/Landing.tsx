@@ -19,7 +19,7 @@ const Landing = (props: Props) => {
                 }}
                 transition={{duration:4,ease:'easeInOut',repeat:Infinity}}
                 >
-                    <Image src={"/images/figma.svg"} alt='figma' fill  className='drop-shadow-lg' />
+                    <Image src={"/images/mongo.svg"} alt='mongodb' fill  className='drop-shadow-lg' />
                 </motion.div>
                 <motion.div className='absolute w-10 h-10 bottom-0 right-0' 
                 

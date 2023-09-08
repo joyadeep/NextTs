@@ -1,5 +1,4 @@
 import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 type Props = {}
 
@@ -9,7 +8,7 @@ const Timeline = (props: Props) => {
         <h1 className='font-bold text-slate-500 text-3xl tracking-tighter '>Experience</h1>
 
         <div className='relative border-l-4 pl-5 pb-3'>
-          <div className='absolute -left-3 top-6 w-5 h-5 rounded-full shadow-xl shadow-blue-700 bg-blue-500 '></div>
+          <div className='absolute -left-3 top-4 w-5 h-5 rounded-full shadow-xl shadow-blue-700 bg-blue-500 '></div>
           <div className='pt-3'>
             <h1 className='text-2xl text-slate-400 tracking-tighter font-bold'>Deerhold Ltd.</h1>
             <h6 className='text-slate-700 tracking-tight font-semibold text-md'>Internship | Mar 2022 - Aug 2022</h6>
@@ -21,7 +20,7 @@ const Timeline = (props: Props) => {
           </div>
         </div>
         <div className='relative border-l-4 pl-5 pb-3'>
-          <div className='absolute -left-3 top-6 w-5 h-5 rounded-full shadow-xl shadow-blue-700 bg-blue-500 '></div>
+          <div className='absolute -left-3 top-4 w-5 h-5 rounded-full shadow-xl shadow-blue-700 bg-blue-500 '></div>
           <div className='pt-3'>
             <h1 className='text-2xl text-slate-400 tracking-tighter font-bold'>goTaxi Nepal</h1>
             <h6 className='text-slate-700 tracking-tight font-semibold text-md'>Frontend Developer | Jan 2023 - Present</h6>
