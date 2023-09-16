@@ -187,7 +187,7 @@ const ServerSidebar = async({serverId}: Props) => {
         <ServerSection
         sectionType='members'
         role={role}
-        label='Video Channels'
+        label='Members'
         server={server}
         />
        <div className='space-y-[2px]'>
