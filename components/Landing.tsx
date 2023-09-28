@@ -35,7 +35,7 @@ const Landing = (props: Props) => {
             </div>
 
             <div className='relative w-40 h-40'>
-            <Image src={"/images/mee.jpg"} fill={true}  alt='' className='rounded-full shadow-xl' />
+            <Image src={"/images/me.jpg"} fill={true}  alt='' className='rounded-full shadow-xl' />
             </div>
 
             <div className='relative w-20  '>
