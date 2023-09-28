@@ -35,7 +35,7 @@ const Landing = (props: Props) => {
             </div>
 
             <div className='relative w-40 h-40'>
-            <Image src={"/images/me.jpg"} fill={true}  alt='' className='rounded-full shadow-xl' />
+            <Image src={"/images/mee.jpg"} fill={true}  alt='' className='rounded-full shadow-xl' />
             </div>
 
             <div className='relative w-20  '>
@@ -67,7 +67,7 @@ const Landing = (props: Props) => {
             transition={{repeat:Infinity,type:'spring',repeatDelay:5,duration:0.3}}
             >👋</motion.p> </div>
             <p className='text-2xl font-semibold' >A Frontend Developer with 1+ years of experience</p>
-            <p className='text-slate-500'>I am a skilled frontend developer with expertise in crafting intuitive and visually appealing user interfaces. I thrive on creating seamless user experiences through clean code, innovative designs, and a strong attention to detail.</p>
+            <p className='text-slate-500 dark:text-slate-300'>I am a skilled frontend developer with expertise in crafting intuitive and visually appealing user interfaces. I thrive on creating seamless user experiences through clean code, innovative designs, and a strong attention to detail.</p>
         </div>
         <Button className='rounded-full shadow-xl text-white  bg-gradient-to-r text-md from-blue-500 to-purple-500 bg px-4 py-2 flex items-center gap-2 ' >See my works <MoveDownRight size={20}/> </Button>
     </div>

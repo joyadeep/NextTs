@@ -10,7 +10,7 @@ type Props = {
 
 const TestimonialCard = ({testimonial}: Props) => {
   return (
-    <Card className='py-5 cursor-pointer hover:shadow-lg'>
+    <Card className='py-5 cursor-pointer hover:shadow-lg dark:bg-slate-950 dark:border-white/60'>
         <CardContent>
     <div className='relative w-20 h-20 mx-auto'>
       {
@@ -19,13 +19,13 @@ const TestimonialCard = ({testimonial}: Props) => {
       }
     </div>
     <div className='text-center'>
-    <h1 className='text-black text-lg font-medium tracking-tight capitalize'>{testimonial.name}</h1>
+    <h1 className='text-black dark:text-white text-lg font-medium tracking-tight capitalize'>{testimonial.name}</h1>
     <h3 className='text-sm'>
       {testimonial.designation}
     </h3>
-    <h5 className='text-sm text-slate-600'>{testimonial.email}</h5>
+    <h5 className='text-sm text-slate-600 dark:text-slate-300'>{testimonial.email}</h5>
     </div>
-    <p className=' tracking-tighter text-slate-500 text-left '>
+    <p className=' tracking-tighter text-slate-500 dark:text-white text-left '>
         <Quote size={24} className='text-blue-500'/>
     {testimonial.message}
     </p>

@@ -8,7 +8,7 @@ const images =[
   {label:"CSS",image:"/images/css.svg"},
   {label:"javascript",image:"/images/javascript.svg"},
   {label:"React",image:"/images/react.svg"},
-  {label:"Next",image:"/images/next.svg"},
+  {label:"Next",image:"/images/next.png"},
   {label:"Typescript",image:"/images/typescript.svg"},
   {label:"Tailwind",image:"/images/tailwind.svg"},
   {label:"Node.js",image:"/images/node.svg"},
@@ -24,7 +24,7 @@ const Skills = (props: Props) => {
           images.map((image,index)=>(
             <div key={index} className='relative w-12 h-12 cursor-pointer'>
          <ActionTooltip label={image.label} align='center' side='top'>
-          <Image alt='' src={image.image} fill className='drop-shadow-lg '/> 
+          <Image alt='' src={image.image} fill className='drop-shadow-lg'/> 
          </ActionTooltip>
         </div>
           ))

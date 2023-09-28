@@ -11,7 +11,7 @@ const ServiceCard = ({icon,title,description}: IService) => {
     <div className='flex items-center flex-col w-full gap-3'>
     {icon}
     <div className='capitalize text-2xl font-semibold'>{title}</div>
-    <p className='text-slate-500 text-center'>{description}</p>
+    <p className='text-slate-500 dark:text-slate-200 text-center'>{description}</p>
 </div>
   )
 }
