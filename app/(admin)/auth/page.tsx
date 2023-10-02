@@ -26,9 +26,9 @@ const Auth = (props: Props) => {
     
   return (
     <div className='w-full h-screen flex items-center justify-center'>
-        <Card className='w-1/3 py-3'>
+        <Card className='w-1/3 py-3 dark:border dark:border-slate-500'>
             <CardContent>
-        <h1 className='text-4xl font-bold text-center tracking-tight text-slate-600'>Login<span className='text-red-500'>.</span></h1>
+        <h1 className='text-4xl font-bold text-center tracking-tight text-slate-600 dark:text-white'>Login<span className='text-red-500'>.</span></h1>
         <form onSubmit={handleSubmit} className='text-left flex flex-col gap-5'>
             <div>
                 <Label htmlFor='email'>Email</Label>
@@ -38,7 +38,7 @@ const Auth = (props: Props) => {
                 <Label htmlFor='password'>Password</Label>
                 <Input type='password' name='password' value={data.password} onChange={handleChange} />
             </div>
-            <Button type='submit' className='bg-blue-500 hover:bg-blue-400 text-lg' >Sign In</Button>
+            <Button type='submit' className='bg-blue-500 hover:bg-blue-500/90 text-lg dark:text-white' >Sign In</Button>
             {/* <Button type='submit' title='Sign in' classname='w-full text-xl font-semibold' /> */}
         </form>
 </CardContent>

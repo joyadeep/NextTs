@@ -19,3 +19,7 @@ else {
 export const startServer=()=>{
     prisma.$connect()
 }
+
+export const stopServer=()=>{
+    prisma.$disconnect();
+}

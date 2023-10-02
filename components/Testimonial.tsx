@@ -125,7 +125,7 @@ const Testimonial = (props: Props) => {
               <Button variant="link" onClick={()=>setIsOpen(true)}>Add your voice</Button>
               </div>
             </DialogTrigger>
-            <DialogContent className="">
+            <DialogContent className="dark:border-slate-500">
               <DialogHeader>
                 <DialogTitle className="text-3xl font-bold">Add your words</DialogTitle>
               </DialogHeader>
@@ -171,7 +171,7 @@ const Testimonial = (props: Props) => {
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                   required
-                    className="resize-none"
+                    className="resize-none dark:border-slate-500"
                     name="message"
                     value={data.message}
                     onChange={handleChange}

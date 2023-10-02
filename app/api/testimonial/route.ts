@@ -1,4 +1,4 @@
-import {prisma,startServer} from '@/lib/db'
+import {prisma,startServer, stopServer} from '@/lib/db'
 import { NextResponse } from 'next/server';
 export const GET=async(req:Request,res:NextResponse)=>{
 try {
@@ -15,7 +15,7 @@ try {
 } catch (error) {
     return NextResponse.json({message:"Something went wrong"},{status:500})
 } finally {
-    prisma.$disconnect();
+    stopServer();
 }
 }
 
@@ -33,6 +33,6 @@ export const POST=async(req:Request,res:NextResponse)=>{
         return NextResponse.json({message:"Something went wrong"},{status:500})
     }
     finally {
-        prisma.$disconnect();
+        stopServer();
     }
 }
