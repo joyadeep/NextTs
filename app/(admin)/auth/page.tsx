@@ -3,25 +3,29 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { loginUser } from '@/services/userServices'
 import React, { useState } from 'react'
+import {useRouter} from 'next/navigation'
 
 
 type Props = {}
 
 const Auth = (props: Props) => {
     const [data,setData]=useState({email:'',password:''})
+    const router=useRouter();
     
     const handleChange=(e:any)=>{
         setData({...data,[e.target.name]:e.target.value})
     }
-    const handleSubmit=(e:any)=>{
+    
+    const handleSubmit=async(e:any)=>{
         e.preventDefault();
-        console.log("form data===",data)
-        // const resp=await adminLogin(data);
-        // console.log("login response ==",resp)
-        // if(resp?.status===200){
-            // localStorage.setItem("admin_token",resp.data.token);
-            // navigate("/dashboard");
+        try {
+            await loginUser(data);
+            router.push("/experience")
+        } catch (error) {
+          console.log("error",error)  
+        }    
         }
     
   return (

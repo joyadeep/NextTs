@@ -232,7 +232,7 @@ const Testimonial = (props: Props) => {
           },
         }}
       >
-        {testimonials.map((testimonial,index) => (
+        {testimonials?.map((testimonial,index) => (
           <SwiperSlide key={index}>
           <TestimonialCard
             key={testimonial._id}
