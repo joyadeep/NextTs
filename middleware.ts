@@ -22,5 +22,5 @@ else {
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/auth','/experience/:path*', '/api/login' , '/api/register']
+  matcher: ['/auth','/experience', '/api/login' , '/api/register']
 }

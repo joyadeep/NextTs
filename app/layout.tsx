@@ -25,7 +25,9 @@ export default function RootLayout({
       enableSystem={false}
       storageKey='portfolio-theme'
       >
-      {children}
+      <main>
+        {children}
+        </main>
       <Toaster/>
       </ThemeProvider>
       </body>
