@@ -26,3 +26,11 @@ model Testimonial {
   message     String
   status      Boolean @default(false)
 }
+
+model Experience {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  orgName  String
+  designation  String
+  duration String
+  ror  String[]
+}

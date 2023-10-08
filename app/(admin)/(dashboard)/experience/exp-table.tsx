@@ -2,7 +2,6 @@ import React from 'react'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -10,6 +9,7 @@ import {
   } from "@/components/ui/table"
 import ActionTooltip from '@/components/ActionTooltip'
 import { MoreVertical, Trash } from 'lucide-react'
+import { useModal } from '@/hooks/use-modal-store'
 type Props = {}
 
 const expList = [
@@ -32,6 +32,7 @@ const expList = [
   ]
 
 const ExpTable = (props: Props) => {
+  const {onOpen}=useModal();
   return (
     <Table>
     <TableHeader>
@@ -55,11 +56,11 @@ const ExpTable = (props: Props) => {
           <TableCell>{exp?.ror[0]}...</TableCell>
           <TableCell>{exp.status}</TableCell>
           <TableCell className='flex '>
-            <ActionTooltip label='Details'>
-                <MoreVertical size={20} className='cursor-pointer' />
+            <ActionTooltip side='top' label='Details'>
+                <MoreVertical onClick={()=>onOpen('experience',{type:'detail'}) } size={20} className='cursor-pointer' />
             </ActionTooltip>
-            <ActionTooltip label='Delete'>
-                <Trash size={20} className='cursor-pointer' />
+            <ActionTooltip side='top' label='Delete'>
+                <Trash onClick={()=>onOpen('experience',{type:'delete'})} size={20} className='cursor-pointer' />
             </ActionTooltip>
           </TableCell>
         </TableRow>
