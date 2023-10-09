@@ -20,6 +20,7 @@ export const GET=async(req:Request,res:NextResponse)=>{
 export const POST=async(req:Request)=>{
     try {
         const data=await req.json();
+        console.log("data====",data)
         if (!data.orgName || !data.designation || !data.duration){
             return NextResponse.json({message:"All fields required"},{status:400})
         }

@@ -32,5 +32,5 @@ model Experience {
   orgName  String
   designation  String
   duration String
-  ror  String[]
+  ror  String
 }

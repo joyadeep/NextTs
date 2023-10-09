@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import EditorJS from '@editorjs/editorjs';
-import dynamic from 'next/dynamic';
 
 type Props = {
     data?:any;
@@ -11,8 +10,12 @@ type Props = {
 
 const TextEditor = ({ data, onChange, holder }: Props) => {
     const editor = new EditorJS({
-        holder
+        holder,
+        tools:{
+
+        }
       });
+      
 
     //   editor.data = data;
 
