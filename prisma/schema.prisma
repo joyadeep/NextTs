@@ -33,4 +33,5 @@ model Experience {
   designation  String
   duration String
   ror  String
+  status Boolean @default(false)
 }

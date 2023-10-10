@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React,{useState,useEffect} from 'react'
 import {
     Table,
     TableBody,
@@ -10,29 +11,25 @@ import {
 import ActionTooltip from '@/components/ActionTooltip'
 import { MoreVertical, Trash } from 'lucide-react'
 import { useModal } from '@/hooks/use-modal-store'
-type Props = {}
+import axios from 'axios'
+type Props = {
+  id:string;
+  orgName:string;
+  designation:string;
+  duration:string;
+  ror:string;
+  status:boolean;
+}
 
-const expList = [
-    {
-        id:1,
-        orgName:"Deerhold Nepal Ltd.",
-        designation:"React Developer Fellow",
-        duration:"May 2022 - Dec 2022",
-        ror:["built and deploy UI","Integrated API","attended daily standup meetings"],
-        status:"Active"
-    },
-    {
-        id:2,
-        orgName:"goTaxi Nepal Ltd.",
-        designation:"Frontend Developer [React] ",
-        duration:"Jan 2023 - Present",
-        ror:["built and deploy UI","Integrated API","attended daily standup meetings"],
-        status:"Active"
-    }
-  ]
 
-const ExpTable = (props: Props) => {
+
+const ExpTable = () => {
+  const [formState,setFormState]=useState<Props[]>([]);
+  useEffect(()=>{
+    axios.get("/api/experience").then((res)=>setFormState(res.data.result))
+  },[])
   const {onOpen}=useModal();
+  console.log("form data ==",formState)
   return (
     <Table>
     <TableHeader>
@@ -47,14 +44,15 @@ const ExpTable = (props: Props) => {
       </TableRow>
     </TableHeader>
     <TableBody>
-      {expList.map((exp,index) => (
+      {formState?.map((exp,index) => (
         <TableRow key={index}>
           <TableCell className="font-medium">{index+1}</TableCell>
-          <TableCell>{exp.orgName}</TableCell>
-          <TableCell>{exp.designation}</TableCell>
-          <TableCell>{exp.duration}</TableCell>
-          <TableCell>{exp?.ror[0]}...</TableCell>
-          <TableCell>{exp.status}</TableCell>
+          <TableCell>{exp?.orgName}</TableCell>
+          <TableCell>{exp?.designation}</TableCell>
+          <TableCell>{exp?.duration}</TableCell>
+          {/* <TableCell>{exp?.ror}...</TableCell> */}
+          <TableCell><div dangerouslySetInnerHTML={{ __html: exp?.ror }} /></TableCell>
+          <TableCell>{exp?.status===true?"Active":"InActive"}</TableCell>
           <TableCell className='flex '>
             <ActionTooltip side='top' label='Details'>
                 <MoreVertical onClick={()=>onOpen('experience',{type:'detail'}) } size={20} className='cursor-pointer' />

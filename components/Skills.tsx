@@ -1,8 +1,9 @@
 "use client"
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ActionTooltip from './ActionTooltip'
 import { useTheme } from 'next-themes'
+import Loading from './Loading'
 
 type Props = {}
 const images =[
@@ -22,7 +23,15 @@ const images =[
 ]
 
 const Skills = (props: Props) => {
+  const [isMounted,setIsMounted]=useState(false);
   const {theme}=useTheme();
+  useEffect(()=>{
+    setIsMounted(true)
+  },[])
+
+  if (!isMounted){
+    return <Loading/>
+  }
 
   return (
     <div className='pt-20 pb-10'>
@@ -31,7 +40,12 @@ const Skills = (props: Props) => {
           images.map((image,index)=>(
             <div key={index} className='relative w-12 h-12 cursor-pointer'>
          <ActionTooltip label={image.label} align='center' side='top'>
-          <Image alt='' src={theme==="dark"?image?.dark||image.image:image.image} fill className='drop-shadow-lg'/> 
+          <Image alt='' 
+          src={
+            theme==="dark"?image?.dark||image.image
+            :
+            image.image} 
+          fill className='drop-shadow-lg'/> 
          </ActionTooltip>
         </div>
           ))

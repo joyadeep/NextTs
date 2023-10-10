@@ -30,7 +30,7 @@ export const POST=async(req:Request)=>{
         }
         return NextResponse.json({result})
     } catch (error) {
-        return NextResponse.json({message:"POST_EXPERIENCE_ERROR"},{status:500})
+        return NextResponse.json({message:"POST_EXPERIENCE_ERROR",error},{status:500})
     } finally {
         stopServer();
     }
