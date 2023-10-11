@@ -16,19 +16,16 @@ type Props = {};
 const Navbar = (props: Props) => {
   return (
     <header className="fixed bg-white dark:bg-black top-0 z-10 flex justify-between items-center w-full px-5 md:px-20 py-3">
-      <div>
       <a
         href="#"
         className="text-3xl font-bold tracking-tighter text-gray-800 dark:text-white w-fit whitespace-nowrap"
       >
         Joy-<span className="text-blue-500">A</span>-deep
       </a>
-      <sup><Badge className="ml-1" variant="outline">Beta</Badge></sup>
-      </div>
       <NavigationMenu className=" gap-4 hidden md:flex">
-        {/* <NavigationMenuLink href="#works" className="cursor-pointer">
+        <NavigationMenuLink href="#works" className="cursor-pointer">
           Works
-        </NavigationMenuLink> */}
+        </NavigationMenuLink>
         <NavigationMenuLink href="#about" className="cursor-pointer">
           About
         </NavigationMenuLink>
@@ -54,9 +51,9 @@ const Navbar = (props: Props) => {
           <SheetContent className=" dark:rounded-md dark:shadow-md dark:shadow-white">
             <SheetClose asChild>
               <NavigationMenu className="flex flex-col gap-5 mt-20 items-start text-xl">
-                {/* <NavigationMenuLink href="#works" className="cursor-pointer">
+                <NavigationMenuLink href="#works" className="cursor-pointer">
                   Works
-                </NavigationMenuLink> */}
+                </NavigationMenuLink>
                 <NavigationMenuLink href="#about" className="cursor-pointer">
                   About
                 </NavigationMenuLink>
