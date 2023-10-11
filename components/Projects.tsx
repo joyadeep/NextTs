@@ -67,14 +67,14 @@ const Projects = (props: Props) => {
           ))
         }
       </TabsContent>
-      <TabsContent value='frontend' className='flex gap-4 flex-wrap'>
+      <TabsContent value='frontend' className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 gap-y-5'>
       {
           frontend?.map((project)=>(
             <ProjectCard key={project.id} project={project} />
           ))
         }
       </TabsContent>
-      <TabsContent value='fullstack' className='flex gap-4 flex-wrap'>
+      <TabsContent value='fullstack' className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 gap-y-5'>
       {
           fullstack?.map((project)=>(
             <ProjectCard key={project.id} project={project} />
