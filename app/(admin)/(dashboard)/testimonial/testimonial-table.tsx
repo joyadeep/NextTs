@@ -3,29 +3,45 @@ import ActionTooltip from '@/components/ActionTooltip'
 import { Switch } from '@/components/ui/switch'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
+import axios from 'axios'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 type Props = {}
-
-const testimonialList=[
-    {
-        name:"ram ram",
-        imageUrl:"https://images.pexels.com/photos/7533347/pexels-photo-7533347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        designation:"software engineer",
-        message:"test message",
-        status:"Active"
-    },
-    {
-        name:"shyam shyam",
-        imageUrl:"https://images.pexels.com/photos/18384304/pexels-photo-18384304/free-photo-of-man-in-t-shirt-and-eyeglasses-in-park-in-town.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        designation:"software engineer",
-        message:"test message",
-        status:"InActive"
-    }
-]
+interface Itestimonial{
+  id:string;
+  name:string;
+  email:string;
+  designation:string;
+  image:string;
+  message:string;
+  status:boolean;
+}
 
 const TestimonialTable = (props: Props) => {
+  const [testimonialData,setTestimonilaData]=useState<Itestimonial[]>([]);
+  useEffect(()=>{
+    axios.get("/api/testimonial").then((res)=>{
+      setTestimonilaData(res.data.result)
+    })
+  },[])
+
+  const handleChange=(testimonial:Itestimonial)=>{
+    // console.log("testimonial=",testimonial)
+    axios.patch(`/api/testimonial/${testimonial.id}`).then((res)=>{
+      console.log("success",res)
+      if (res.status===200){
+        const updatedData=testimonialData.filter((data)=>{
+          if(data.id===res.data.result.id){
+            return res.data.result
+          }
+          return data
+        })
+        console.log("updated DATA ==",updatedData)
+      }
+    }).catch((error)=>console.log(error))
+  }
+
   return (
     <Table>
     <TableHeader>
@@ -40,23 +56,24 @@ const TestimonialTable = (props: Props) => {
       </TableRow>
     </TableHeader>
     <TableBody>
-      {testimonialList.map((testimonial,index) => (
+      {testimonialData.map((testimonial,index) => (
         <TableRow key={index}>
           <TableCell className="font-medium">{index+1}</TableCell>
           <TableCell>
             <div className='w-10 h-10 relative'>
-                <Image src={testimonial?.imageUrl} alt='people' fill className='rounded-full object-cover' />
+                <Image src={testimonial?.image} alt='people' fill className='rounded-full object-cover' />
             </div>
           </TableCell>
-          <TableCell>{testimonial.name}</TableCell>
-          <TableCell>{testimonial.designation}</TableCell>
+          <TableCell className='whitespace-nowrap'>{testimonial.name}</TableCell>
+          <TableCell className='whitespace-nowrap'>{testimonial.designation}</TableCell>
           <TableCell>{testimonial.message}</TableCell>
           {/* <TableCell>{testimonial.status}</TableCell> */}
           <TableCell className='flex '>
-            <ActionTooltip side='top' label='Details'>
+            {/* <ActionTooltip side='top' label='Details'> */}
                 {/* <MoreVertical onClick={()=>{}} size={20} className='cursor-pointer' /> */}
-                <Switch value={testimonial.status} checked={testimonial.status==="Active"} className={cn(testimonial.status==="Active" ? "bg-blue-500 dark:text-white" : "bg-slate-200")} />
-            </ActionTooltip>
+                {/* <Switch value={testimonial.status?"Active":"InActive"} checked={testimonial.status} className={cn(testimonial.status? "bg-blue-500 dark:text-white" : "bg-slate-200")} /> */}
+                <Switch checked={testimonial.status} onClick={()=>handleChange(testimonial)} />
+            {/* </ActionTooltip> */}
           </TableCell>
         </TableRow>
       ))}

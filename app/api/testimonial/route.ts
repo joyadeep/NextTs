@@ -1,9 +1,12 @@
 import {prisma,startServer, stopServer} from '@/lib/db'
-import { NextResponse } from 'next/server';
-export const GET=async(req:Request,res:NextResponse)=>{
+import { NextRequest, NextResponse } from 'next/server';
+export const GET=async(req:NextRequest,res:NextResponse)=>{
 try {
     startServer()
-    const result = await prisma.testimonial.findMany({where:{status:true}});
+    const url=new URL(req.url)
+    const type=url.searchParams.get("type");
+    console.log("url query params TYPE =",type);
+    const result = type==="active"?await prisma.testimonial.findMany({where:{status:true}}) : await prisma.testimonial.findMany()
     if(!result)
         return NextResponse.json({
             message:"no data found !"

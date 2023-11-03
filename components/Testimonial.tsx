@@ -39,7 +39,7 @@ const Testimonial = (props: Props) => {
     const fetch=async()=>{
       setIsLoading(true)
       try {
-        const result=await axios.get("/api/testimonial");
+        const result=await axios.get("/api/testimonial?type=active");
         if(result.status===200){
           setTestimonials(result.data.result)
         }
