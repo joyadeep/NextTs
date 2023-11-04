@@ -28,7 +28,7 @@ export const POST=async(req:Request,res:NextResponse)=>{
             message:"user logged in successfully",
             data:{id:user.id,username:user.username,email:user.email}
         },{status:200})
-        response.cookies.set("adminToken",token,{httpOnly:true});
+        response.cookies.set("adminToken",token,{expires: new Date(Date.now() +  2 * 60 * 60 * 1000),httpOnly:true});
         return response;
     } catch (error) {
         return NextResponse.json({message:"USER_GET_ERROR"},{status:500});

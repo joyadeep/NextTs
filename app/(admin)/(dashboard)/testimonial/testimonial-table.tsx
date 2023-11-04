@@ -1,8 +1,7 @@
 "use client"
-import ActionTooltip from '@/components/ActionTooltip'
+import Loading from '@/components/Loading'
 import { Switch } from '@/components/ui/switch'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { cn } from '@/lib/utils'
 import axios from 'axios'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -20,14 +19,16 @@ interface Itestimonial{
 
 const TestimonialTable = (props: Props) => {
   const [testimonialData,setTestimonilaData]=useState<Itestimonial[]>([]);
+  const [isLoading,setIsLoading]=useState(false);
   useEffect(()=>{
+    setIsLoading(true);
     axios.get("/api/testimonial").then((res)=>{
       setTestimonilaData(res.data.result)
-    })
+    }).finally(()=>setIsLoading(false))
   },[])
 
   const handleChange=(testimonial:Itestimonial)=>{
-    // console.log("testimonial=",testimonial)
+    setIsLoading(true);
     axios.patch(`/api/testimonial/${testimonial.id}`).then((res)=>{
       console.log("success",res)
       if (res.status===200){
@@ -40,6 +41,11 @@ const TestimonialTable = (props: Props) => {
         console.log("updated DATA ==",updatedData)
       }
     }).catch((error)=>console.log(error))
+    .finally(()=>{setIsLoading(false)})
+  }
+
+  if (isLoading) {
+    return <Loading/>
   }
 
   return (
@@ -52,7 +58,6 @@ const TestimonialTable = (props: Props) => {
         <TableHead>Designation</TableHead>
         <TableHead>Message</TableHead>
         <TableHead>Status</TableHead>
-        {/* <TableHead>Actions</TableHead> */}
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -67,13 +72,8 @@ const TestimonialTable = (props: Props) => {
           <TableCell className='whitespace-nowrap'>{testimonial.name}</TableCell>
           <TableCell className='whitespace-nowrap'>{testimonial.designation}</TableCell>
           <TableCell>{testimonial.message}</TableCell>
-          {/* <TableCell>{testimonial.status}</TableCell> */}
           <TableCell className='flex '>
-            {/* <ActionTooltip side='top' label='Details'> */}
-                {/* <MoreVertical onClick={()=>{}} size={20} className='cursor-pointer' /> */}
-                {/* <Switch value={testimonial.status?"Active":"InActive"} checked={testimonial.status} className={cn(testimonial.status? "bg-blue-500 dark:text-white" : "bg-slate-200")} /> */}
                 <Switch checked={testimonial.status} onClick={()=>handleChange(testimonial)} />
-            {/* </ActionTooltip> */}
           </TableCell>
         </TableRow>
       ))}

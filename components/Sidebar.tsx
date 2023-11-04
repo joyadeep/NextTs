@@ -6,7 +6,7 @@ import { Separator } from './ui/separator'
 import { ModeToggle } from './ModeToggle'
 import SideLink from './SideLink'
 import { Button } from './ui/button'
-import { cn } from '@/lib/utils'
+import { logout } from '@/services/userServices'
 type Props = {}
 
 const Sidebar = (props: Props) => {
@@ -37,7 +37,7 @@ const Sidebar = (props: Props) => {
             ))
         }
         </div>
-        <Button className="w-full text-right mt-5">Logout</Button>
+        <Button className="w-full text-right mt-5" onClick={()=>{logout()}}>Logout</Button>
     </ScrollArea>
   )
 }
