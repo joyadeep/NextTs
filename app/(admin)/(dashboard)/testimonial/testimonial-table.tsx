@@ -32,13 +32,12 @@ const TestimonialTable = (props: Props) => {
     axios.patch(`/api/testimonial/${testimonial.id}`).then((res)=>{
       console.log("success",res)
       if (res.status===200){
-        const updatedData=testimonialData.filter((data)=>{
+        testimonialData.filter((data)=>{
           if(data.id===res.data.result.id){
             return res.data.result
           }
           return data
         })
-        console.log("updated DATA ==",updatedData)
       }
     }).catch((error)=>console.log(error))
     .finally(()=>{setIsLoading(false)})

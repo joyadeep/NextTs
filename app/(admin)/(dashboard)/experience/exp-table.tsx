@@ -12,6 +12,7 @@ import ActionTooltip from '@/components/ActionTooltip'
 import { MoreVertical, Trash } from 'lucide-react'
 import { useModal } from '@/hooks/use-modal-store'
 import axios from 'axios'
+import Loading from '@/components/Loading'
 type Props = {
   id:string;
   orgName:string;
@@ -21,15 +22,18 @@ type Props = {
   status:boolean;
 }
 
-
-
 const ExpTable = () => {
   const [formState,setFormState]=useState<Props[]>([]);
+  const [isLoading,setIsLoading]=useState(false);
   useEffect(()=>{
+    setIsLoading(true);
     axios.get("/api/experience").then((res)=>setFormState(res.data.result))
+    .finally(()=>setIsLoading(false))
   },[])
   const {onOpen}=useModal();
-  console.log("form data ==",formState)
+  if (isLoading) {
+    return <Loading/>
+  }
   return (
     <Table>
     <TableHeader>
@@ -50,7 +54,6 @@ const ExpTable = () => {
           <TableCell>{exp?.orgName}</TableCell>
           <TableCell>{exp?.designation}</TableCell>
           <TableCell>{exp?.duration}</TableCell>
-          {/* <TableCell>{exp?.ror}...</TableCell> */}
           <TableCell><div dangerouslySetInnerHTML={{ __html: exp?.ror }} /></TableCell>
           <TableCell>{exp?.status===true?"Active":"InActive"}</TableCell>
           <TableCell className='flex '>
