@@ -30,14 +30,18 @@ const TestimonialTable = (props: Props) => {
   const handleChange=(testimonial:Itestimonial)=>{
     setIsLoading(true);
     axios.patch(`/api/testimonial/${testimonial.id}`).then((res)=>{
-      console.log("success",res)
       if (res.status===200){
-        testimonialData.filter((data)=>{
-          if(data.id===res.data.result.id){
-            return res.data.result
+        const updatedTestimonials = testimonialData.map(testimonial => {
+          if (testimonial.id === res.data.result.id) {
+            return {
+              ...testimonial,
+              status:!testimonial.status
+            };
+          } else {
+            return testimonial;
           }
-          return data
-        })
+        });
+        setTestimonilaData(updatedTestimonials);
       }
     }).catch((error)=>console.log(error))
     .finally(()=>{setIsLoading(false)})

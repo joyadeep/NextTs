@@ -17,10 +17,6 @@ const Sidebar = (props: Props) => {
             label:"Experience"
         },
         {
-            path:"/main/skills",
-            label:"Skills"
-        },
-        {
             path:"/testimonial",
             label:"Testimonial"
         }
