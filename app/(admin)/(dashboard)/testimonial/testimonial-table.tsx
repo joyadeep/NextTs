@@ -2,6 +2,7 @@
 import Loading from '@/components/Loading'
 import { Switch } from '@/components/ui/switch'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { useToast } from '@/components/ui/use-toast'
 import axios from 'axios'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -20,6 +21,7 @@ interface Itestimonial{
 const TestimonialTable = (props: Props) => {
   const [testimonialData,setTestimonilaData]=useState<Itestimonial[]>([]);
   const [isLoading,setIsLoading]=useState(false);
+  const {toast}=useToast();
   useEffect(()=>{
     setIsLoading(true);
     axios.get("/api/testimonial").then((res)=>{
@@ -31,6 +33,7 @@ const TestimonialTable = (props: Props) => {
     setIsLoading(true);
     axios.patch(`/api/testimonial/${testimonial.id}`).then((res)=>{
       if (res.status===200){
+        toast({title:"Success",description:"Testimonial toggled Successfully !"})
         const updatedTestimonials = testimonialData.map(testimonial => {
           if (testimonial.id === res.data.result.id) {
             return {
@@ -43,7 +46,10 @@ const TestimonialTable = (props: Props) => {
         });
         setTestimonilaData(updatedTestimonials);
       }
-    }).catch((error)=>console.log(error))
+          }).catch((error)=>{
+            console.log(error);
+            toast({variant:'destructive',title:"Failed",description:"Testimonial toggle failed !"})
+          })
     .finally(()=>{setIsLoading(false)})
   }
 

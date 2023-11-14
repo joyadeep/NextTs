@@ -54,7 +54,8 @@ const ExpTable = () => {
           <TableCell>{exp?.orgName}</TableCell>
           <TableCell>{exp?.designation}</TableCell>
           <TableCell>{exp?.duration}</TableCell>
-          <TableCell><div dangerouslySetInnerHTML={{ __html: exp?.ror }} /></TableCell>
+          <TableCell><div className='list-disc' dangerouslySetInnerHTML={{ __html: exp?.ror }} /></TableCell>
+          {/* <TableCell className='list-disc'>{exp?.ror}</TableCell> */}
           <TableCell>{exp?.status===true?"Active":"InActive"}</TableCell>
           <TableCell className='flex '>
             <ActionTooltip side='top' label='Details'>

@@ -1,12 +1,14 @@
 import { Loader2 } from 'lucide-react'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  size?:number;
+}
 
-const Loading = (props: Props) => {
+const Loading = ({size}: Props) => {
   return (
     <div className='w-full my-5'>
-        <Loader2 size={52} className='animate-spin mx-auto'/>
+        <Loader2 size={size ?? 52} className='animate-spin mx-auto'/>
     </div>
   )
 }

@@ -8,7 +8,8 @@ interface Ieditor{
 }
 const Editor = ({value,onChange}:Ieditor) => {
   return (
-    <ReactQuill className='bg-transparent rounded-md' value={value} onChange={onChange}   />
+    <ReactQuill
+    className='bg-transparent rounded-md' value={value} onChange={onChange}   />
   )
 }
 

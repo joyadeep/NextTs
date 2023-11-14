@@ -1,6 +1,8 @@
 import {create} from 'zustand'
 
-export type ModalType="experience";
+
+
+export type ModalType="experience" | "projects"
 
 interface ModalStore {
     name:ModalType | null;

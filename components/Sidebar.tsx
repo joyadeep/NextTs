@@ -17,6 +17,10 @@ const Sidebar = (props: Props) => {
             label:"Experience"
         },
         {
+            path:"/projects",
+            label:"Projects"
+        },
+        {
             path:"/testimonial",
             label:"Testimonial"
         }
@@ -35,7 +39,7 @@ const Sidebar = (props: Props) => {
     }
 
   return (
-    <ScrollArea className="h-screen w-60 rounded-md border px-2 py-1">
+    <ScrollArea className="h-screen flex w-60 rounded-md border px-2 py-1">
         <h1 className='text-center text-3xl font-bold tracking-tight'>Dashboard<span className='text-4xl text-orange-500'>.</span></h1>
         <Separator className='mt-2'/>
         <ModeToggle/>

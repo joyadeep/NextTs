@@ -6,12 +6,14 @@ import { Label } from '@/components/ui/label'
 import { loginUser } from '@/services/userServices'
 import React, { useState } from 'react'
 import {useRouter} from 'next/navigation'
+import Loading from '@/components/Loading'
 
 
 type Props = {}
 
-const Auth = (props: Props) => {
+const Auth = () => {
     const [data,setData]=useState({email:'',password:''})
+    const [isSubmitting,setIsSubmitting]=useState(false);
     const router=useRouter();
     
     const handleChange=(e:any)=>{
@@ -20,12 +22,15 @@ const Auth = (props: Props) => {
     
     const handleSubmit=async(e:any)=>{
         e.preventDefault();
+        setIsSubmitting(true);
         try {
             await loginUser(data);
             router.push("/experience")
         } catch (error) {
           console.log("error",error)  
-        }    
+        }  finally {
+            setIsSubmitting(false)
+        }  
         }
     
   return (
@@ -42,8 +47,7 @@ const Auth = (props: Props) => {
                 <Label htmlFor='password'>Password</Label>
                 <Input type='password' name='password' value={data.password} onChange={handleChange} />
             </div>
-            <Button type='submit' className='bg-blue-500 hover:bg-blue-500/90 text-lg dark:text-white' >Sign In</Button>
-            {/* <Button type='submit' title='Sign in' classname='w-full text-xl font-semibold' /> */}
+            <Button type='submit' disabled={isSubmitting} className='bg-blue-500 hover:bg-blue-500/90 text-lg dark:text-white' >{isSubmitting?<Loading size={32}/>:"Sign In"}</Button>
         </form>
 </CardContent>
         </Card>

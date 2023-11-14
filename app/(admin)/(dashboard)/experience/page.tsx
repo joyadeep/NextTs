@@ -10,7 +10,7 @@ const Experience = (props: Props) => {
   const {onOpen}=useModal()
   return (
     <>
-    <div className='text-right pb-3'>
+    <div className='list-disc text-right pb-3'>
     <Button
     onClick={()=>onOpen('experience',{type:"create"})}
      className='bg-blue-500 text-white hover:bg-blue-500/80 tracking-tight'>Add Experience</Button>
