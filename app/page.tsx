@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button'
+import { Settings } from 'lucide-react'
 import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className='text-3xl font-semibold'>Start your project</h1>
-      <Button>Click ME</Button>
+    <main className="flex flex-col items-center justify-between p-24">
+      <h1>Hello world</h1>
     </main>
   )
 }
