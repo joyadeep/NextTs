@@ -23,7 +23,7 @@ const Navbar = (props: Props) => {
     ]
   return (
     <nav className='w-full flex justify-between px-10 py-4  border-b'>
-        <div className='flex items-center gap-x-2'><Bug className='w-7 h-7'/> <span className='text-blue-600 text-lg font-bold tracking-tight'>Issuee</span></div>
+        <Link href={"/"} className='flex items-center gap-x-2'><Bug className='w-7 h-7'/> <span className='text-blue-600 text-lg font-bold tracking-tight'>Issuee</span></Link>
         <div className='flex items-center gap-x-5'>
             {
                 navlinks.map((navlink)=>(
