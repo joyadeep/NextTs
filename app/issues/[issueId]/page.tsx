@@ -1,8 +1,10 @@
-import { issueStatus } from '@/app/constants/IssueConstant';
+"use client"
+import { issueStatus } from '@/constants/IssueConstant';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Link from 'next/link';
 import React from 'react'
+import { useModal } from '@/hooks/useModal';
 
 interface IssueIdPageProps {
     params:{
@@ -11,10 +13,11 @@ interface IssueIdPageProps {
 }
 
 const IssueId = ({params}:IssueIdPageProps) => {
+  const {onOpen}=useModal();
   return (
     <div>
-    <Button variant="primary" className='float-right'>
-        <Link href="/issues/new">Create New Issue</Link>
+    <Button variant="primary" className='float-right' onClick={()=>onOpen('createIssue')}>
+      Create New Issue
     </Button>
     <Table className='mt-3'>
       <TableHeader className='bg-slate-300'>

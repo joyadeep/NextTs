@@ -7,7 +7,6 @@ import axios from 'axios';
 
 import "easymde/dist/easymde.min.css";
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 
 interface IssueForm{

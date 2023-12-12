@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import ModalProvider from '@/components/provider/modalProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar/>
           <div className='pt-5 px-10'>
+            <ModalProvider/>
           {children}
           </div>
         </body>
